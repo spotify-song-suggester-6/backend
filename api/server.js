@@ -13,7 +13,7 @@ const usersRouter = require("../users/users-router.js");
 const restricted = require("../auth/restricted-middleware.js");
 
 server.use("/api/auth", authRouter);
-server.use("/api/users", restricted, usersRouter);
+server.use("/api/users", usersRouter);
 
 
 server.get("/", (req, res) => {
