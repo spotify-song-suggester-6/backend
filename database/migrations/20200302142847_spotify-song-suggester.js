@@ -37,6 +37,7 @@ exports.up = function(knex) {
     .onUpdate("CASCADE")
     .onDelete("CASCADE")
     tbl.string("title", 256);
+    tbl.string("artist", 256)
     tbl.integer("user_id")
     .unsigned()
     .notNullable()

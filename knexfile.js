@@ -3,7 +3,7 @@ require('dotenv').config();
 module.exports = {
   development: {
     client: 'pg',
-    connection: "postgres://ojiogqxh:gSHuLM6E_QxRPJzKlcT_oe6ar6KNCUxf@drona.db.elephantsql.com:5432/ojiogqxh",
+    connection: process.env.DB_URL,
     migrations: {
       directory: './database/migrations',
     },
