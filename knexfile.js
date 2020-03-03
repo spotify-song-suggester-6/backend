@@ -8,6 +8,7 @@ module.exports = {
       directory: './database/migrations',
     },
     seeds: { directory: './database/seeds' },
+    pool: {min: 2, max: 20}
   },
 
   testing: {
@@ -17,6 +18,7 @@ module.exports = {
       directory: './database/migrations',
     },
     seeds: { directory: './database/seeds' },
+    pool: {min: 2, max: 20}
   },
 
   production: {
@@ -26,5 +28,6 @@ module.exports = {
       directory: './database/migrations',
     },
     seeds: { directory: './data/seeds' },
+    pool: {min: 2, max: 20}
   },
 };

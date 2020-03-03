@@ -7,49 +7,52 @@ exports.up = function(knex) {
       tbl.string("username", 128);
       tbl.string("password", 128);
   })
-  .createTable("favorites", tbl => {
-      tbl.integer("song_id").primary();
-      tbl.string("title", 256);
-      tbl.integer("user_id")
-      .unsigned()
-      .notNullable()
-      .references("id")
-      .inTable("users")
-      .onUpdate("CASCADE")
-      .onDelete("CASCADE");
-      
-  })
   .createTable("song_database", tbl => {
-      tbl.integer("track_id")
-      .primary()
-      .unsigned()
-      .notNullable()
-      .references("song_id")
-      .inTable("favorites")
-      .onUpdate("CASCADE")
-      .onDelete("CASCADE")
+      tbl.increments("id")
+      tbl.string("track_id")
       tbl.string("artist_name", 256)
       tbl.string("track_name", 256)
-      tbl.decimal("acousticness")
-      tbl.decimal("danceability", null)
-      tbl.decimal("energy", null)
-      tbl.decimal("instrumentalness", null)
-      tbl.decimal("liveness", null)
-      tbl.decimal("loudness", null)
-      tbl.decimal("speechiness", null)
-      tbl.decimal("tempo", null)
-      tbl.decimal("valence", null)
-      tbl.integer("duration_ms")
-      tbl.integer("key")
-      tbl.integer("mode")
-      tbl.integer("time_signature")
-      tbl.integer("popularity")
+      tbl.string("acousticness")
+      tbl.string("danceability")
+      tbl.string("energy")
+      tbl.string("instrumentalness")
+      tbl.string("liveness")
+      tbl.string("loudness")
+      tbl.string("speechiness")
+      tbl.string("tempo")
+      tbl.string("valence")
+      tbl.string("duration_ms")
+      tbl.string("key")
+      tbl.string("mode")
+      tbl.string("time_signature")
+      tbl.string("popularity")
   })
+  .createTable("favorites", tbl => {
+    tbl.increments("id").primary()
+    tbl.integer("song_id")
+    .unsigned()
+    .notNullable()
+    .references("id")
+    .inTable("song_database")
+    .onUpdate("CASCADE")
+    .onDelete("CASCADE")
+    tbl.string("title", 256);
+    tbl.integer("user_id")
+    .unsigned()
+    .notNullable()
+    .references("id")
+    .inTable("users")
+    .onUpdate("CASCADE")
+    .onDelete("CASCADE");
+    
+})
 };
 
 exports.down = function(knex) {
   return knex.schema
-  .dropTableIfExists("users")
   .dropTableIfExists("favorites")
   .dropTableIfExists("song_database")
+  .dropTableIfExists("users")
+  
+  
 };
