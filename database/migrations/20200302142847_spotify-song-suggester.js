@@ -8,9 +8,8 @@ exports.up = function(knex) {
       tbl.string("password", 128);
   })
   .createTable("song_database", tbl => {
-      tbl.increments("id")
-      tbl.string("track_id")
       tbl.string("artist_name", 256)
+      tbl.string("track_id")
       tbl.string("track_name", 256)
       tbl.string("acousticness")
       tbl.string("danceability")
@@ -29,13 +28,6 @@ exports.up = function(knex) {
   })
   .createTable("favorites", tbl => {
     tbl.increments("id").primary()
-    tbl.integer("song_id")
-    .unsigned()
-    .notNullable()
-    .references("id")
-    .inTable("song_database")
-    .onUpdate("CASCADE")
-    .onDelete("CASCADE")
     tbl.string("title", 256);
     tbl.string("artist", 256)
     tbl.integer("user_id")

@@ -1,33 +1,62 @@
-require('dotenv').config();
+// Update with your config settings.
 
 module.exports = {
+
   development: {
-    client: 'pg',
-    connection: process.env.DB_URL,
+    client: 'sqlite3',
+    useNullAsDefault: true,
+    connection: {
+      filename: './database/spotifynder.db3',
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
+      },
+    },
     migrations: {
       directory: './database/migrations',
     },
-    seeds: { directory: './database/seeds' },
-    pool: {min: 2, max: 20}
+    seeds: {
+      directory: './database/seeds',
+    },
   },
 
-  testing: {
-    client: 'pg',
-    connection: process.env.DB_URL,
+  staging: {
+    client: 'sqlite3',
+    useNullAsDefault: true,
+    connection: {
+      filename: './database/auth.db3',
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
+      },
+    },
     migrations: {
       directory: './database/migrations',
     },
-    seeds: { directory: './database/seeds' },
-    pool: {min: 2, max: 20}
+    seeds: {
+      directory: './database/seeds',
+    },
   },
 
   production: {
-    client: 'pg',
-    connection: process.env.DB_URL,
+    client: 'sqlite3',
+    useNullAsDefault: true,
+    connection: {
+      filename: './database/auth.db3',
+    },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run('PRAGMA foreign_keys = ON', done);
+      },
+    },
     migrations: {
       directory: './database/migrations',
     },
-    seeds: { directory: './data/seeds' },
-    pool: {min: 2, max: 20}
-  },
+    seeds: {
+      directory: './database/seeds',
+    },
+  }
+
 };
