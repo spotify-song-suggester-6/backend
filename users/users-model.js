@@ -5,6 +5,7 @@ module.exports = {
   find,
   findBy,
   findById,
+  findUserFavorites
 };
 
 function find() {
@@ -23,4 +24,11 @@ function findById(id) {
   return db('users')
     .where({ id })
     .first();
+}
+
+function findUserFavorites(id) {
+  return db("favorites as f")
+    .join("users as u", "u.id", "f.user_id")
+    .select("f.title", "f.artist", "u.username as requestedBy")
+    .where("user_id", id);
 }
