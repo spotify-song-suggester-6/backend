@@ -8,8 +8,9 @@ exports.up = function(knex) {
       tbl.string("password", 128);
   })
   .createTable("song_database", tbl => {
+     
       tbl.string("artist_name", 256)
-      tbl.string("track_id")
+      tbl.string("track_id").primary();
       tbl.string("track_name", 256)
       tbl.string("acousticness")
       tbl.string("danceability")
@@ -37,7 +38,6 @@ exports.up = function(knex) {
     .inTable("users")
     .onUpdate("CASCADE")
     .onDelete("CASCADE");
-    
 })
 };
 
@@ -49,3 +49,11 @@ exports.down = function(knex) {
   
   
 };
+
+// tbl.string("song_id")
+//     .unsigned()
+//     .notNullable()
+//     .references("id")
+//     .inTable("song_database")
+//     .onUpdate("CASCADE")
+//     .onDelete("CASCADE");
