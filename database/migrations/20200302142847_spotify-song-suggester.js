@@ -38,6 +38,12 @@ exports.up = function(knex) {
     .inTable("users")
     .onUpdate("CASCADE")
     .onDelete("CASCADE");
+    tbl.string("song_id")
+    .unsigned()
+    .references("track_id")
+    .inTable("song_database")
+    .onUpdate("CASCADE")
+    .onDelete("CASCADE");
 })
 };
 
