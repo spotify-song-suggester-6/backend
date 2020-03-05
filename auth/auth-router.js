@@ -31,6 +31,7 @@ router.post('/register', (req, res) => {
           const token = generateToken(user); // get a token
   
           res.status(200).json({
+            id: user.id,
             message: `Welcome ${user.username}!`,
             token, // send the token
           });
@@ -52,7 +53,7 @@ router.post('/register', (req, res) => {
     const secret = "keep it secret, keep it safe"
     
     const options = {
-        expiresIn: "1h"
+        expiresIn: "8h"
     
     }
     
